@@ -21,11 +21,10 @@
     "vdom-benchmark"
   ],
   "dependencies": {
-    "redux": "^3.0.2",
+    "redux": "*",
     "vdom-benchmark-base": "^0.2.2",
-    "virtex": "*",
-    "virtex-dom": "*",
-    "redux": "*"
+    "virtex": "^0.1.7",
+    "virtex-dom": "^0.1.12"
   },
   "devDependencies": {
     "browser-sync": "^1.9.0",

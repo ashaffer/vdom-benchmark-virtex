@@ -12,15 +12,15 @@ var create = virtex.create
 var update = virtex.update
 
 
-var NAME = 'virtual-dom';
-var VERSION = '2.0.1';
+var NAME = 'virtex';
+var VERSION = '0.1.7';
 
 function renderTree(nodes) {
   var children = [];
   var i;
   var n;
 
-  for (i = 0; i < nodes.length; i++) {
+  for (i = 0; i < nodes.length; ++i) {
     n = nodes[i];
     if (n.children !== null) {
       children.push(element('div', {key: n.key}, renderTree(n.children), n.key));
