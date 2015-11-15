@@ -4,7 +4,7 @@ var benchmark = require('vdom-benchmark-base');
 var Virtex = require('virtex').default
 var element = require('virtex').element
 var redux = require('redux')
-var dom = require('virtex-dom')
+var dom = require('virtex-dom').default
 
 var store = redux.applyMiddleware(dom(document))(redux.createStore)(() => {}, {})
 var virtex = Virtex(store.dispatch)
@@ -55,7 +55,7 @@ BenchmarkImpl.prototype.render = function() {
 
 BenchmarkImpl.prototype.update = function() {
   var newVroot = element('div', null, renderTree(this.b))
-  update(this._vRoot, newVroot, this._root)
+  update(this._vRoot, newVroot)
 };
 
 document.addEventListener('DOMContentLoaded', function(e) {
