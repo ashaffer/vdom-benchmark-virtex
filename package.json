@@ -23,8 +23,8 @@
   "dependencies": {
     "redux": "*",
     "vdom-benchmark-base": "^0.2.2",
-    "virtex": "^0.1.7",
-    "virtex-dom": "^0.1.12"
+    "virtex": "^0.1.12",
+    "virtex-dom": "^0.1.17"
   },
   "devDependencies": {
     "browser-sync": "^1.9.0",

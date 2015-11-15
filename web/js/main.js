@@ -23,9 +23,9 @@ function renderTree(nodes) {
   for (i = 0; i < nodes.length; ++i) {
     n = nodes[i];
     if (n.children !== null) {
-      children.push(element('div', {key: n.key}, renderTree(n.children), n.key));
+      children.push(element('div', {key: n.key}, renderTree(n.children)));
     } else {
-      children.push(element('span', {key: n.key}, [n.key.toString()]));
+      children.push(element('span', {key: n.key}, n.key));
     }
   }
 
