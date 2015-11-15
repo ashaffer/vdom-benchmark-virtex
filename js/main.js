@@ -24,9 +24,9 @@ function renderTree(nodes) {
   for (i = 0; i < nodes.length; ++i) {
     n = nodes[i];
     if (n.children !== null) {
-      children.push(element('div', {key: n.key}, renderTree(n.children), n.key));
+      children.push(element('div', {key: n.key}, renderTree(n.children)));
     } else {
-      children.push(element('span', {key: n.key}, [n.key.toString()]));
+      children.push(element('span', {key: n.key}, n.key));
     }
   }
 
@@ -2234,7 +2234,7 @@ function dift(prev, next, effect, key) {
 
   // Reversed
   while (pStartIdx <= pEndIdx && nStartIdx <= nEndIdx && equal(pStartItem, nEndItem)) {
-    effect(MOVE, pStartItem, nEndItem, pEndIdx - movedFromFront);
+    effect(MOVE, pStartItem, nEndItem, pEndIdx - movedFromFront + 1);
     pStartItem = prev[++pStartIdx];
     nEndItem = next[--nEndIdx];
     ++movedFromFront;
@@ -2289,7 +2289,6 @@ function dift(prev, next, effect, key) {
       ++created;
     } else if (pStartIdx !== oldIdx) {
       (0, _bitVector.setBit)(keep, oldIdx - keepBase);
-      sortedIndex(keep, oldIdx - keepBase);
       effect(MOVE, prev[oldIdx], nStartItem, pivotIdx++);
     } else {
       pivotDest = nStartIdx;
@@ -2317,37 +2316,6 @@ function dift(prev, next, effect, key) {
   function equal(a, b) {
     return key(a) === key(b);
   }
-}
-
-function insertSorted(bv, i) {
-  (0, _bitVector.setBit)(bv, sortedIndex(bv, i), i);
-}
-
-function sortedIndex(bv, i) {
-  var len = bv.length * 32;
-
-  if (len === 0) return 0;
-  if (i < (0, _bitVector.getBit)(bv, 0)) return 0;
-  if (i > (0, _bitVector.getBit)(bv, len - 1)) return len;
-
-  var lo = 0;
-  var mid = Math.floor(len / 2);
-  var hi = len;
-
-  do {
-    var p = (0, _bitVector.getBit)(bv, mid);
-    if (i < p) {
-      hi = mid;
-      mid = Math.floor((mid + lo) / 2);
-    } else if (i > p) {
-      lo = mid;
-      mid = Math.floor((mid + hi) / 2);
-    } else {
-      return mid;
-    }
-  } while (mid > 0 && mid < len);
-
-  return -1;
 }
 
 function isUndefined(val) {
